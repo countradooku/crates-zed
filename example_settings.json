@@ -1,0 +1,12 @@
+{
+  "lsp": {
+    "crates-lsp": {
+      "settings": {
+        "inlay_hints": true,
+        "diagnostics": true,
+        "needs_update_severity": 3,
+        "cache_directory": null
+      }
+    }
+  }
+}
