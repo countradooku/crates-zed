@@ -42,17 +42,32 @@ impl CratesAutocompleteExtension {
         // Determine the correct asset name based on platform and architecture
         let (asset_name, archive_type) = match platform {
             zed::Os::Mac => match arch {
-                zed::Architecture::Aarch64 => ("crates-lsp-aarch64-apple-darwin.tar.gz", zed::DownloadedFileType::GzipTar),
-                zed::Architecture::X8664 => ("crates-lsp-x86_64-apple-darwin.tar.gz", zed::DownloadedFileType::GzipTar),
+                zed::Architecture::Aarch64 => (
+                    "crates-lsp-aarch64-apple-darwin.tar.gz",
+                    zed::DownloadedFileType::GzipTar,
+                ),
+                zed::Architecture::X8664 => (
+                    "crates-lsp-x86_64-apple-darwin.tar.gz",
+                    zed::DownloadedFileType::GzipTar,
+                ),
                 _ => return Err("Unsupported architecture for macOS".to_string()),
             },
             zed::Os::Linux => match arch {
-                zed::Architecture::Aarch64 => ("crates-lsp-aarch64-unknown-linux-gnu.tar.gz", zed::DownloadedFileType::GzipTar),
-                zed::Architecture::X8664 => ("crates-lsp-x86_64-unknown-linux-gnu.tar.gz", zed::DownloadedFileType::GzipTar),
+                zed::Architecture::Aarch64 => (
+                    "crates-lsp-aarch64-unknown-linux-gnu.tar.gz",
+                    zed::DownloadedFileType::GzipTar,
+                ),
+                zed::Architecture::X8664 => (
+                    "crates-lsp-x86_64-unknown-linux-gnu.tar.gz",
+                    zed::DownloadedFileType::GzipTar,
+                ),
                 _ => return Err("Unsupported architecture for Linux".to_string()),
             },
             zed::Os::Windows => match arch {
-                zed::Architecture::X8664 => ("crates-lsp-x86_64-pc-windows-msvc.zip", zed::DownloadedFileType::Zip),
+                zed::Architecture::X8664 => (
+                    "crates-lsp-x86_64-pc-windows-msvc.zip",
+                    zed::DownloadedFileType::Zip,
+                ),
                 _ => return Err("Unsupported architecture for Windows".to_string()),
             },
         };
@@ -80,22 +95,15 @@ impl CratesAutocompleteExtension {
                 &zed::LanguageServerInstallationStatus::Downloading,
             );
 
-            zed::download_file(
-                &asset.download_url,
-                &version_dir,
-                archive_type,
-            )
-            .map_err(|e| format!("Failed to download crates-lsp: {e}"))?;
+            zed::download_file(&asset.download_url, &version_dir, archive_type)
+                .map_err(|e| format!("Failed to download crates-lsp: {e}"))?;
 
             // Make the binary executable on Unix systems
             #[cfg(unix)]
             {
                 use std::os::unix::fs::PermissionsExt;
-                fs::set_permissions(
-                    &binary_path,
-                    std::fs::Permissions::from_mode(0o755),
-                )
-                .map_err(|e| format!("Failed to set executable permission: {e}"))?;
+                fs::set_permissions(&binary_path, std::fs::Permissions::from_mode(0o755))
+                    .map_err(|e| format!("Failed to set executable permission: {e}"))?;
             }
         }
 
