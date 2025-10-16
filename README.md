@@ -5,11 +5,22 @@ A Zed extension that provides intelligent autocomplete, versioning, and features
 ## Features
 
 - **Crate Name Autocomplete**: Get intelligent suggestions while typing crate names
-- **Version Autocomplete**: Automatically suggest the latest available versions
-- **Outdated Version Indicators**: Visual hints showing when dependencies need updating
-- **Feature Suggestions**: Autocomplete for crate features
-- **Inlay Hints**: Display package status inline
-- **Diagnostics**: Configurable warnings for outdated dependencies
+- **Version Autocomplete**: Automatically suggest available versions with smart completion
+- **Outdated Version Indicators**: Visual inlay hints showing when dependencies need updating
+- **VS Code-style Inlay Hints**: Display package status inline (✅ for up-to-date, ❌ with version for updates needed)
+- **Smart Diagnostics**: Configurable warnings and errors for outdated and unknown dependencies
+- **Hover Information**: Detailed package information when hovering over dependencies
+- **Smart Caching**: Local caching to minimize API calls to crates.io
+
+### Current Limitations
+
+**Note**: The underlying `crates-lsp` language server currently has some limitations:
+
+- **Features autocomplete** is not yet supported by crates-lsp (this is a limitation of the LSP itself, not this extension)
+- **Version list display** depends on your editor's LSP completion UI
+- For the best experience similar to VS Code or JetBrains, ensure your Zed editor settings have LSP completions enabled
+
+We've optimized the extension configuration to provide the best possible experience within these constraints.
 
 ## Installation
 
@@ -59,7 +70,7 @@ tokio = { version = "1.0", features = ["full"] }  # Feature autocomplete availab
 
 ## Configuration
 
-You can configure the extension in your Zed settings file (`settings.json`):
+The extension comes with **VS Code-style defaults** optimized for the best experience, matching the popular VS Code "crates" extension. You can customize these in your Zed settings file (`settings.json`):
 
 ```json
 {
@@ -68,7 +79,11 @@ You can configure the extension in your Zed settings file (`settings.json`):
       "settings": {
         "inlay_hints": true,
         "diagnostics": true,
-        "needs_update_severity": 3,
+        "up_to_date_hint": "✅",
+        "needs_update_hint": "❌ {}",
+        "needs_update_severity": 2,
+        "unknown_dep_severity": 1,
+        "up_to_date_severity": 4,
         "cache_directory": null
       }
     }
@@ -82,8 +97,57 @@ You can configure the extension in your Zed settings file (`settings.json`):
 |--------|------|---------|-------------|
 | `inlay_hints` | boolean | `true` | Toggle visual hints for package status |
 | `diagnostics` | boolean | `true` | Enable/disable diagnostics for outdated packages |
-| `needs_update_severity` | integer | `3` | Severity level for outdated package warnings (1-4) |
+| `up_to_date_hint` | string | `"✅"` | Text shown next to up-to-date dependencies (VS Code style) |
+| `needs_update_hint` | string | `"❌ {}"` | Text shown for packages needing updates (VS Code style, {} = new version) |
+| `needs_update_severity` | integer | `2` | Severity for outdated packages (1=ERROR, 2=WARNING, 3=INFO, 4=HINT) |
+| `unknown_dep_severity` | integer | `1` | Severity for unknown/not-found packages (ERROR level like VS Code) |
+| `up_to_date_severity` | integer | `4` | Severity for up-to-date packages (subtle HINT level) |
 | `cache_directory` | string | OS-specific | Custom directory for caching crates.io data |
+
+## VS Code Comparison
+
+This extension provides a similar experience to the popular VS Code "crates" extension with these features:
+
+| Feature | VS Code Extension | Crates Autocomplete (Zed) | Status |
+|---------|-------------------|---------------------------|--------|
+| Crate name autocomplete | ✅ | ✅ | Full support |
+| Version autocomplete | ✅ | ✅ | Full support |
+| Inline version hints | ✅ Compatible (✅) / Incompatible (❌) | ✅ Up-to-date (✅) / Needs update (❌) | Equivalent |
+| Outdated warnings | ✅ | ✅ | Full support |
+| Unknown crate errors | ✅ | ✅ | Full support |
+| Hover documentation | ✅ | ✅ | Full support |
+| Features autocomplete | ❌ (deprecated extension) | ⚠️ (LSP limitation) | Not yet available |
+| Update commands | ✅ | ⚠️ Coming soon | Planned |
+
+**Default Settings Match VS Code**: The extension now uses VS Code-style visual indicators (✅/❌) and severity levels by default for a familiar experience.
+
+### Customizing the Visual Style
+
+If you prefer different visual indicators, you can customize them:
+
+```json
+{
+  "lsp": {
+    "crates-lsp": {
+      "settings": {
+        "up_to_date_hint": "✓",        // Simple checkmark
+        "needs_update_hint": "⬆ {}",   // Arrow with version
+        "needs_update_severity": 3      // INFO level for less prominence
+      }
+    }
+  }
+}
+```
+
+### Note on Features Autocomplete
+
+Currently, `crates-lsp` does not support autocomplete for crate features. This is a known limitation of the language server itself. For features, you'll need to:
+
+1. Visit the crate's documentation on [docs.rs](https://docs.rs)
+2. Check the crate's README on [crates.io](https://crates.io)
+3. Or use `cargo add <crate> --features <feature>` to see available features
+
+We're monitoring [crates-lsp development](https://github.com/MathiasPius/crates-lsp) for future support of this feature.
 
 ## How It Works
 

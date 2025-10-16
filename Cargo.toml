@@ -1,6 +1,6 @@
 [package]
 name = "crates_autocomplete"
-version = "0.0.1"
+version = "0.1.2"
 edition = "2024"
 
 [lib]

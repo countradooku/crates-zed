@@ -8,7 +8,14 @@
       "Bash(cargo check:*)",
       "Bash(rustup target add:*)",
       "Bash(cargo build:*)",
-      "Bash(curl:*)"
+      "Bash(curl:*)",
+      "Bash(cargo clippy:*)",
+      "Bash(cargo fmt:*)",
+      "Read(//c/**)",
+      "Bash(cargo doc:*)",
+      "Bash(cargo tree:*)",
+      "Bash(find:*)",
+      "WebFetch(domain:marketplace.visualstudio.com)"
     ],
     "deny": [],
     "ask": []

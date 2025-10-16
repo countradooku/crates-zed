@@ -1,0 +1,67 @@
+{
+  "// This is an example Zed settings.json configuration for the Crates Autocomplete extension": null,
+  "// Copy these settings to your Zed settings.json file to customize the extension": null,
+  "// The extension comes with VS Code-style defaults, so no configuration is needed for basic use": null,
+
+  "lsp": {
+    "crates-lsp": {
+      "settings": {
+        "// === VS Code-style Configuration (DEFAULT) ===": null,
+        "// The extension uses these values by default - no need to add them unless customizing": null,
+
+        "// Enable/disable inlay hints showing package status": null,
+        "inlay_hints": true,
+
+        "// Enable/disable diagnostic messages for outdated packages": null,
+        "diagnostics": true,
+
+        "// VS Code-style: Checkmark for up-to-date dependencies": null,
+        "up_to_date_hint": "✅",
+
+        "// VS Code-style: X mark with version for packages needing updates": null,
+        "needs_update_hint": "❌ {}",
+
+        "// Severity levels: 1=ERROR, 2=WARNING, 3=INFO, 4=HINT": null,
+
+        "// VS Code-style: WARNING level for packages that need updates": null,
+        "needs_update_severity": 2,
+
+        "// VS Code-style: ERROR level for unknown/not-found packages": null,
+        "unknown_dep_severity": 1,
+
+        "// HINT level for up-to-date packages (subtle)": null,
+        "up_to_date_severity": 4,
+
+        "// Custom cache directory (null = use OS default)": null,
+        "cache_directory": null,
+
+        "// === Alternative Configurations ===": null,
+
+        "// Minimal style (uncomment to use):": null,
+        "// \"up_to_date_hint\": \"✓\",": null,
+        "// \"needs_update_hint\": \"⬆ {}\",": null,
+        "// \"needs_update_severity\": 3,": null,
+
+        "// Emoji style (uncomment to use):": null,
+        "// \"up_to_date_hint\": \"✨\",": null,
+        "// \"needs_update_hint\": \"📦 {}\",": null,
+
+        "// No hints style (uncomment to use):": null,
+        "// \"up_to_date_hint\": \"\",": null,
+        "// \"needs_update_hint\": \"\",": null
+      }
+    }
+  },
+
+  "// === Additional Zed Settings ===": null,
+  "// These enhance the overall LSP experience": null,
+
+  "inlay_hints": {
+    "enabled": true
+  },
+
+  "show_completions_on_input": true,
+
+  "// Enable documentation in completion menu": null,
+  "completion_documentation": true
+}
