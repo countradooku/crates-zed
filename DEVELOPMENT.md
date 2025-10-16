@@ -11,7 +11,7 @@ This guide will help you develop and test the Crates Autocomplete extension for 
 ## Project Structure
 
 ```
-crates_autocomplete/
+crates-zed/
 ├── src/
 │   └── lib.rs              # Main extension logic
 ├── Cargo.toml              # Rust dependencies and build config

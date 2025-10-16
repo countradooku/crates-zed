@@ -241,7 +241,7 @@ All pull requests must pass CI checks:
 ## Project Structure
 
 ```
-crates_autocomplete/
+crates-zed/
 ├── .github/
 │   ├── workflows/          # CI/CD workflows
 │   ├── ISSUE_TEMPLATE/     # Issue templates

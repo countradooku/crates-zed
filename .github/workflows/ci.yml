@@ -134,8 +134,8 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: crates_autocomplete-${{ matrix.target }}
-          path: target/${{ matrix.target }}/release/crates_autocomplete.wasm
+          name: crates-zed-${{ matrix.target }}
+          path: target/${{ matrix.target }}/release/crates-zed.wasm
           if-no-files-found: error
 
   validate-extension:

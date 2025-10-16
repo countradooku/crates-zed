@@ -12,7 +12,7 @@ This guide walks you through testing the Crates Autocomplete extension in Zed.
 
 The extension has already been built! The WebAssembly file is located at:
 ```
-target/wasm32-wasip1/release/crates_autocomplete.wasm
+target/wasm32-wasip1/release/crates-zed.wasm
 ```
 
 If you need to rebuild:
@@ -38,7 +38,7 @@ cargo build --target wasm32-wasip1 --release
 
 3. **Install Dev Extension**:
    - Click the **"Install Dev Extension"** button at the top
-   - Navigate to this directory: `C:\Users\radu0\Desktop\Code\Rust\crates_autocomplete`
+   - Navigate to this directory: `C:\Users\radu0\Desktop\Code\Rust\crates-zed`
    - Select/Open the folder
 
 4. **Verify Installation**:

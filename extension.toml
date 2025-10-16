@@ -11,16 +11,16 @@ name = "crates-lsp"
 language = "TOML"
 
 [[commands]]
-name = "crates_autocomplete.open_documentation"
+name = "crates-zed.open_documentation"
 title = "Crates: Open Documentation"
 description = "Open the documentation for the crate under the cursor on docs.rs"
 
 [[commands]]
-name = "crates_autocomplete.open_repository"
+name = "crates-zed.open_repository"
 title = "Crates: Open Repository"
 description = "Open the repository for the crate under the cursor on crates.io"
 
 [[commands]]
-name = "crates_autocomplete.clear_cache"
+name = "crates-zed.clear_cache"
 title = "Crates: Clear Cache"
 description = "Clear the local cache of crate information"

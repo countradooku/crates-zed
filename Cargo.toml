@@ -1,5 +1,5 @@
 [package]
-name = "crates_autocomplete"
+name = "crates-zed"
 version = "0.1.2"
 edition = "2024"
 
