@@ -132,7 +132,7 @@ jobs:
         run: cargo build --target ${{ matrix.target }} --release
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: crates-zed-${{ matrix.target }}
           path: target/${{ matrix.target }}/release/crates-zed.wasm
